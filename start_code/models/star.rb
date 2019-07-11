@@ -10,8 +10,13 @@ class Star
   end
 
   def save()
-    sql = "INSERT INTO "
-    values = []
+    sql = "INSERT INTO stars(
+           first_name,
+           last_name
+           )
+           VALUES ($1, $2)
+           RETURNING id = $3"
+    values = [@first_name, @last_name]
     @id = SqlRunner.run(sql, values).first['id'].to_i
   end
 
